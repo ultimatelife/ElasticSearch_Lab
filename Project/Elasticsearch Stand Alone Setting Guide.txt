@@ -1,2 +1,27 @@
 Elasticsearch Stand Alone
 
+------------------------------------------
+Elasticsaerch
+
+cluster.name: cluster1
+node.name: standalone
+node.master: true
+node.data: true
+transport.host: localhost
+transport.tcp.port: 9300
+http.port: 9200
+network.host: 0.0.0.0
+discovery.zen.minimum_master_nodes: 1
+
+------------------------------------------
+Kibana
+
+server.host : 0.0.0.0
+------------------------------------------
+
+
+------------------------------------------
+logstash
+
+
+------------------------------------------
