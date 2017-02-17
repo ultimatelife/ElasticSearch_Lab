@@ -1,0 +1,55 @@
+
+Logstash
+	1) 
+		/* logstash.conf */
+		input {            
+		    stdin {}
+		}
+		 
+		output {            
+		    elasticsearch {        
+		        hosts => ["localhost:9200"]        
+		    }    
+		    stdout {                        
+		        codec => rubydebug            
+		    }
+		}
+
+
+	2)
+		./bin/logstash -f logstash.conf --configtest
+
+		$ bin/logstash -f logstash.conf --configtest
+
+	3) JDBC
+		1)
+			./bin/elasticsearch-plugin list jdbc$ bin/plugin install logstash-input-jdbc
+
+		2)
+			wget http://xbib.org/repository/org/xbib/elasticsearch/importer/elasticsearch-jdbc/2.3.4.1/elasticsearch-jdbc-2.3.4.1-dist.zip
+
+		3)
+			/* logstash.conf */
+			input {    
+			    jdbc {        
+			        jdbc_driver_library => "lib/mysql-connector-java-5.1.33.jar"        
+			        jdbc_driver_class => "com.mysql.jdbc.Driver"        
+			        jdbc_connection_string => "jdbc:mysql://localhost:3306/[db-name]"        
+			        jdbc_user => "[db-user]"        
+			        jdbc_password => "[password]"        
+			        statement => "SELECT * FROM [tbl-name]"        
+			        schedule => "* * * * *"                
+			    }    
+			}
+			output {    
+			    elasticsearch {        
+			        hosts => ["localhost:9200"]    
+			    }    stdout {        
+			        codec => rubydebug    
+			    }
+			}
+
+
+		4) 
+			bin/logstash -f logstash-jdbc.conf --configtest
+			bin/logstash -f logstash-jdbc.conf

@@ -1,0 +1,10 @@
+curl -XGET 'http://localhost:9200/basketball/record/_search?q=points:30&pretty'
+
+or
+
+curl -XGET 'http://localhost:9200/basketball/record/_search? -d '
+{
+	"query" : {
+		"term" : { "points" : 30 }
+	}
+}
